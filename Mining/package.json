@@ -1,0 +1,52 @@
+{
+  "name": "orb-miner",
+  "version": "1.0.0",
+  "description": "Automated ORB mining bot for Solana with Jupiter swap integration",
+  "main": "dist/index.js",
+  "scripts": {
+    "setup": "npm install && cd dashboard && npm install",
+    "update": "node -e \"require('child_process').execSync(process.platform === 'win32' ? 'update.bat' : 'bash update.sh', {stdio: 'inherit'})\"",
+    "start": "concurrently --names \"BOT,DASHBOARD\" --prefix-colors \"cyan,magenta\" \"npm run start:bot\" \"npm run start:dashboard\"",
+    "start:bot": "ts-node src/index.ts",
+    "start:dashboard": "cd dashboard && node start-dashboard.js --dev",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "build": "tsc",
+    "build:dashboard": "cd dashboard && npm run build",
+    "clean": "rm -rf dist",
+    "simulate": "ts-node scripts/monte-carlo-simulation.ts",
+    "pnl:reconcile": "ts-node scripts/reconcile-pnl.ts",
+    "pnl:reset": "ts-node scripts/reset-pnl.ts"
+  },
+  "keywords": [
+    "solana",
+    "orb",
+    "ore",
+    "mining",
+    "bot",
+    "automation"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1",
+    "@jup-ag/api": "^6.0.0",
+    "@radix-ui/react-tooltip": "^1.2.8",
+    "@solana/spl-token": "^0.4.1",
+    "@solana/web3.js": "^1.95.0",
+    "@types/sqlite3": "^5.1.0",
+    "axios": "^1.7.2",
+    "bs58": "^5.0.0",
+    "dotenv": "^16.4.5",
+    "open": "^9.1.0",
+    "sqlite3": "^5.1.7",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.2.0",
+    "@types/node": "^20.12.12",
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
